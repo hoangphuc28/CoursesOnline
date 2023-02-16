@@ -1,0 +1,14 @@
+services:
+  Port: :3000
+  FileUrl: localhost:4000
+  AuthUrl: localhost:50051
+  UserUrl: localhost:50052
+  CourseUrl: localhost:50053
+  CartUrl: localhost:50054
+  CategoryUrl: localhost:50054
+  TopicUrl: localhost:50055
+  PaymentUrl: localhost:4002
+  Secret: go-courses
+  AccessTokenExpiredIn: 24
+  RefreshTokenExpiredIn: 720
+

@@ -1,0 +1,20 @@
+services:
+  Port: :3000
+  FileUrl: fileservice:4000
+  AuthUrl: authservice:50051
+  UserUrl: userservice:50052
+  CourseUrl: courseservice:50053
+  CartUrl: cartservice:50054
+  CategoryUrl: localhost:50054
+  TopicUrl: localhost:50055
+  PaymentUrl: paymentservice:4002
+  Secret: go-courses
+  MigrationURL: file://migrations
+  AccessTokenExpiredIn: 24
+  RefreshTokenExpiredIn: 720
+mysql:
+  Host: mysql-course
+  Port: 3306
+  User: root
+  Password: Abc123
+  DBName: course
