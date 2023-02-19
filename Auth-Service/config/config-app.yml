@@ -1,0 +1,28 @@
+
+mysql:
+  Host: mysql-course
+  Port: 3306
+  User: root
+  Password: Abc123
+  DBName: course
+service:
+  Version: 1.0.0
+  Mode: development
+  port: 50051
+  Secret: go-courses
+  ActiveTokenExpired: 1
+  AccessTokenExpiredIn: 24
+  RefreshTokenExpiredIn: 720
+email:
+  AppEmail: management.userxyz@gmail.com
+  AppPassword: lkkjakmjuqudztfa
+otherServices:
+  MailServiceURL: mailservice:4001
+  CartServiceUrl: cartservice:50054
+clientSide:
+  URL: localhost:8080
+rabbitMq:
+  User: abc
+  Password: Abc123
+  Port: 5672
+  Host: localhost

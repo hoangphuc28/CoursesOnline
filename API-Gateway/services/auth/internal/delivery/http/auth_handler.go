@@ -3,12 +3,11 @@ package http
 import (
 	"errors"
 	"fmt"
+	"github.com/gin-gonic/gin"
+	pb "github.com/hoangphuc28/CoursesOnline-ProtoFile/Auth"
 	"github.com/hoangphuc28/CoursesOnline/API-Gateway/config"
 	"github.com/hoangphuc28/CoursesOnline/API-Gateway/pkg/common"
 	"github.com/hoangphuc28/CoursesOnline/API-Gateway/services/auth/internal/model"
-	pb "github.com/hoangphuc28/CoursesOnline/Proto/Auth-Service"
-
-	"github.com/gin-gonic/gin"
 )
 
 type AuthHandler struct {
@@ -33,8 +32,6 @@ func (hdl AuthHandler) GetTokenVerifyAccount() gin.HandlerFunc {
 		})
 
 		if err != nil {
-			fmt.Println(err)
-
 			panic(err)
 		}
 
@@ -86,7 +83,7 @@ func (hdl AuthHandler) Register() gin.HandlerFunc {
 		if err := ctx.BindJSON(&body); err != nil {
 			panic(err)
 		}
-		_, err := hdl.client.Register(ctx, &pb.RegisterRequest{
+		res, err := hdl.client.Register(ctx, &pb.RegisterRequest{
 			FirstName:   body.FirstName,
 			LastName:    body.LastName,
 			PhoneNumber: body.PhoneNumber,
@@ -95,11 +92,13 @@ func (hdl AuthHandler) Register() gin.HandlerFunc {
 			Address:     body.Address,
 			Role:        body.Role,
 		})
-
+		fmt.Println(res.Error)
 		if err != nil {
 			panic(err)
 		}
-
+		if res.Error != nil {
+			panic(res.Error)
+		}
 		ctx.JSON(200, gin.H{"Message": "Create User-Service successfully"})
 	}
 

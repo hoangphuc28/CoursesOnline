@@ -2,8 +2,8 @@ package auth
 
 import (
 	"fmt"
+	pb "github.com/hoangphuc28/CoursesOnline-ProtoFile/Auth"
 	"github.com/hoangphuc28/CoursesOnline/API-Gateway/config"
-	pb "github.com/hoangphuc28/CoursesOnline/Proto/Auth-Service"
 	"google.golang.org/grpc"
 )
 
