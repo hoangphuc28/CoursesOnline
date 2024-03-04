@@ -1,0 +1,117 @@
+syntax = "proto3";
+package user;
+option go_package = "github.com/hoangphuc28/CoursesOnline/Proto/User-Service";
+service UserService {
+  rpc UpdateUser(UpdateUserRequest) returns (User);
+  rpc GetTokenResetPass(GetTokenResetPassRequest) returns (GetTokenResetPassResponse);
+  rpc ChangePassword(ChangePasswordRequest) returns (ChangePasswordResponse);
+  rpc UpdateAvatar(UpdateAvatarRequest) returns (UpdateAvatarResponse);
+  rpc NewInstructor(NewInstructorRequest) returns (Instructor);
+  rpc GetInstructor(GetInstructorInformationRequest) returns (GetInstructorInformationResponse);
+  rpc GetProfile(GetUserInformationRequest) returns (GetProfileResponse);
+  rpc GetProfileInstructor(GetUserInformationRequest) returns (GetProfileInstructorResponse);
+}
+message User {
+  string id = 1;
+  string firstName = 2;
+  string lastName = 3;
+  string email = 4;
+  string phoneNumber = 5;
+  string address = 6;
+  Picture avatar = 7;
+  string lastLogin = 8;
+}
+message UpdateUserRequest {
+  uint32 id = 1;
+  string firstName = 2;
+  string lastName = 3;
+  string email = 4;
+  string password = 5;
+  string phoneNumber = 6;
+  string address = 7;
+  string role = 8;
+  bool is_instructor = 9;
+  Picture avt = 10;
+
+}
+message Picture {
+  uint32 id = 1;
+  string url = 2;
+  string width = 3;
+  string height = 4;
+}
+
+message  GetTokenResetPassRequest {
+  string email = 1;
+}
+message GetTokenResetPassResponse {
+
+}
+
+message ChangePasswordRequest {
+  string password = 1;
+  string new_password = 2;
+  string email = 3;
+}
+message ChangePasswordResponse {
+
+}
+
+message UpdateAvatarRequest {
+  string fileName = 1;
+  int64 size = 2;
+  bytes content = 3;
+  string folder = 4;
+  string email = 5;
+  string width = 6;
+  string height = 7;
+}
+message UpdateAvatarResponse {
+  string url = 1;
+}
+message NewInstructorRequest {
+  string email = 1;
+  string website = 2;
+  string  linkedin = 3;
+  string youtube = 4;
+  string bio = 5;
+}
+
+
+message GetInstructorInformationRequest {
+  string id = 1;
+  string key = 2;
+}
+
+message Instructor {
+  string id = 1;
+  string firstName = 2;
+  string lastName = 3;
+  string email = 4;
+  string website = 5;
+  string  linkedin = 6;
+  string youtube = 7;
+  string bio = 8;
+  string userId =  9;
+  string NumStudents = 10;
+  string NumReviews = 11;
+  string TotalCourses = 12;
+  Picture avt = 13;
+}
+message GetInstructorInformationResponse {
+  Instructor information = 2;
+}
+
+message GetUserInformationRequest {
+  string userId = 1;
+}
+message GetProfileResponse {
+  User information = 1;
+}
+message GetProfileInstructorResponse {
+  string accountPaypal = 1;
+  string website = 2;
+  string  linkedin = 3;
+  string youtube = 4;
+  string bio = 5;
+}

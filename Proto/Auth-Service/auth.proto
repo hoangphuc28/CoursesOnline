@@ -1,0 +1,71 @@
+syntax = "proto3";
+package auth;
+
+option go_package="github.com/hoangphuc28/CoursesOnline/Proto/Auth-Service";
+service AuthService {
+  rpc Register(RegisterRequest)returns(User);
+  rpc Login(LoginRequest)returns(LoginResponse);
+  rpc Validate(ValidateRequest)returns(ValidateResponse);
+  rpc NewToken(NewTokenRequest)returns(NewTokenResponse);
+  rpc VerifyAccount(VerifyAccountRequest)returns(VerifyAccountResponse);
+  rpc GetTokenVerifyAccount(VerifyAccountRequest)returns(VerifyAccountResponse);
+  rpc GetTokenResetPassword(VerifyAccountRequest)returns(VerifyAccountResponse);
+}
+message Picture {
+  uint32 id = 1;
+  string url = 2;
+  string width = 3;
+  string height = 4;
+}
+message User {
+  string id = 1;
+  string firstName = 2;
+  string lastName = 3;
+  string email = 4;
+  string phoneNumber = 5;
+  string address = 6;
+  Picture avatar = 7;
+  string lastLogin = 8;
+}
+message RegisterRequest {
+  string firstName = 1;
+  string lastName = 2;
+  string email = 3;
+  string password = 4;
+  string phoneNumber = 5;
+  string address = 6;
+  string role = 7;
+}
+message LoginRequest {
+  string email = 1;
+  string password = 2;
+}
+message LoginResponse {
+  User information = 1;
+  string accessToken = 2;
+  string refreshToken = 3;
+  uint32 expiresAt = 4;
+  string tokenType = 5;
+}
+
+message ValidateRequest {
+  string token = 1;
+}
+message ValidateResponse {
+  int64 userId = 1;
+}
+
+message NewTokenRequest {
+  string refreshToken = 1;
+}
+message NewTokenResponse {
+  string accessToken = 1;
+  uint32 expiresAt = 2;
+}
+message VerifyAccountRequest {
+  string email = 1;
+  string password = 2;
+}
+message VerifyAccountResponse {
+}
+

@@ -1,0 +1,60 @@
+syntax = "proto3";
+package cart;
+option go_package = "github.com/hoangphuc28/CoursesOnline/Proto/Cart-Service";
+service CartService {
+  rpc GetCart(GetCartRequest) returns(GetCartResponse);
+  rpc AddItem(CartItemRequest) returns(Cart);
+  rpc RemoveItem(CartItemRequest) returns(Cart);
+  rpc ResetCart(ResetCartRequest) returns(Cart);
+  rpc CreateCart(CreateCartRequest) returns(Cart);
+}
+
+message Image {
+  string url = 1;
+  string width = 2;
+  string height = 3;
+}
+message Course {
+  string id = 1;
+  string title = 2;
+  string description = 3 ;
+  string level = 4 ;
+  string price = 6 ;
+  float discount = 7 ;
+  string currency = 8 ;
+  string duration = 9 ;
+  string status = 10 ;
+  float rating = 11 ;
+  Image thumbnail = 12;
+  string instructorId = 14;
+}
+message Cart {
+  string id = 1;
+  repeated Course courses = 2;
+  string totalPrice = 3;
+  string currency = 4;
+}
+message GetCartRequest {
+  string id = 1;
+}
+message GetCartResponse {
+  Cart cart = 1;
+  string totalCourse = 2;
+}
+message CartItemRequest {
+  string cartId = 1;
+  string courseId = 2;
+}
+
+
+message ErrorResponse {
+  int64 code = 1;
+  string message = 2;
+}
+message ResetCartRequest {
+  string cartId = 1;
+}
+
+message CreateCartRequest {
+  string userId = 1;
+}

@@ -1,0 +1,276 @@
+syntax = "proto3";
+package course;
+option go_package = "github.com/Zhoangp/Course-Service/pb";
+import "User-Service/user.proto";
+service CourseService {
+
+  //Course service
+  rpc GetCourses(GetCoursesRequest) returns (GetCoursesResponse);
+  rpc GetCourse(GetCourseRequest) returns (GetCourseResponse);
+  rpc GetAllCategories(GetAllCategoriesRequest) returns(GetAllCategoriesResponse);
+  rpc CreateCourse(CreateCourseRequest) returns (CreateCourseResponse);
+  rpc Enrollment(EnrollmentRequest) returns (EnrollmentResponse);
+  rpc GetCourseContent(GetCourseContentRequest) returns (GetCourseContentResponse);
+  rpc GetEnrollments(GetEnrollmentsRequest) returns (GetEnrollmentsResponse);
+  rpc GetPrices(GetPricesRequest) returns (GetPricesResponse);
+  rpc UpdateCourse(UpdateCourseRequest) returns (UpdateCourseResponse);
+  rpc PublishCourse(PublishCourseRequest) returns (PublishCourseResponse);
+  rpc GetCourseWithInstructor(GetCourseWithInstructorRequest) returns (GetCourseWithInstructorResponse);
+  rpc DeleteCourse(DeleteCourseRequest) returns (DeleteCourseResponse);
+  rpc FilterCourses(FilterRequest) returns(GetCoursesResponse);
+
+  //Section service
+  rpc CreateSection(CreateSectionRequest) returns (CreateSectionResponse);
+  rpc UpdateSection(UpdateSectionRequest) returns (Response);
+  rpc DeleteSection(DeleteSectionRequest) returns (Response);
+  rpc GetSections(GetSectionsRequest) returns (GetSectionsResponse);
+
+
+  //Lecture service
+  rpc CreateLecture(CreateLectureRequest) returns (CreateLectureResponse);
+  rpc UpdateLecture(UpdateLectureRequest) returns (Response);
+  rpc DeleteLecture(DeleteLectureRequest) returns (Response);
+
+  rpc CheckOwner(CheckOwnerRequest) returns (Response);
+}
+message CheckOwnerRequest {
+  string userId = 1;
+  string courseId = 2;
+}
+
+message DeleteLectureRequest {
+  string lectureId = 1;
+}
+message UpdateLectureRequest {
+  string lectureId = 1;
+  string title = 2;
+  string content = 3;
+  Resource resource = 4;
+}
+message CreateLectureRequest {
+  string sectionId = 1;
+  string title = 2;
+  string content = 3;
+}
+message CreateLectureResponse {
+  string lectureId = 1;
+
+}
+message GetSectionsRequest {
+  string courseId = 1;
+}
+message GetSectionsResponse {
+  repeated Section sections = 1;
+}
+
+message DeleteSectionRequest {
+  string sectionId = 1;
+}
+message UpdateSectionRequest {
+  string sectionId = 1;
+  string title = 2;
+}
+message CreateSectionRequest {
+  string courseId = 1;
+  string title = 2;
+}
+message CreateSectionResponse {
+  string sectionId = 1;
+
+}
+message Response {
+}
+message Image {
+  string url = 1;
+  string width = 2;
+  string height = 3;
+}
+message Resource {
+  string url = 1;
+  string duration = 2;
+}
+message Lecture {
+  string id = 1;
+  string title = 2;
+  string content = 3;
+  string status = 4;
+  Resource resource = 5;
+  int32 sort_order = 6;
+  bool is_free = 7;
+}
+message Section {
+  string id = 1;
+  string title = 2;
+  int32 numberOfLectures = 3;
+  repeated Lecture lectures = 4;
+}
+message coupon {
+  string id = 1;
+  string percent = 2;
+  string code = 3;
+}
+
+message Course {
+  string id = 1;
+  string title = 2;
+  string SubCategory = 3;
+  repeated Goal goals = 4;
+  string requirement = 5;
+  string  level = 6;
+  repeated Section sections = 7;
+  string description = 8;
+  string  language = 9;
+  bool isPublish = 10;
+  coupon discount = 11;
+  price price = 12;
+  int32 TotalSections = 13;
+  int32 TotalLectures = 14;
+  string TotalLength = 15;
+  string NumReviews = 16;
+  string AvgRating = 17;
+  Image thumbnail = 18;
+  user.Instructor instructor = 19;
+
+}
+message GetCoursesRequest {
+    int32 page = 1;
+    int32 pageSize = 2;
+}
+message GetCoursesResponse {
+  repeated link links = 1;
+  repeated Course courses = 2;
+  int32 courseLength =4;
+  int32 numPages = 5;
+}
+
+message GetCourseRequest {
+  string id = 1;
+}
+message link {
+  string href = 1;
+  string rel = 2;
+  string method = 3;
+}
+message GetCourseResponse {
+  Course course = 1;
+}
+message Category {
+  string id = 1;
+  string name = 2;
+  repeated SubCategory subcategories = 3;
+}
+message SubCategory {
+  string id = 1;
+  string name = 2;
+  string categoryId = 3;
+}
+message GetAllCategoriesRequest {
+
+}
+message GetAllCategoriesResponse {
+  repeated Category categories = 1;
+}
+message Goal {
+  string content = 1;
+}
+enum Level {
+  All_Level = 0;
+  Beginner = 1;
+  Intermediate = 2;
+  Expert = 3;
+}
+enum Language {
+  VN = 0;
+  EN = 1;
+}
+message UpdateCourseRequest {
+  string title = 1;
+  string SubCategory = 2;
+  string goals = 3;
+  string requirement = 4;
+  string  level = 5;
+  repeated Section sections = 6;
+  string description = 7;
+  string  language = 8;
+  bool isPaid = 9;
+  int32 price = 10;
+  Image thumbnail = 11;
+  string instructorId = 12;
+  string courseId = 13;
+}
+message UpdateCourseResponse {
+
+}
+message CreateCourseRequest {
+  string title = 1;
+  string SubCategoryId = 2;
+  string instructorId = 3;
+}
+message CreateCourseResponse {
+  string courseId = 1;
+}
+enum currency {
+  VND = 0;
+  USD = 1;
+}
+message price {
+  string id = 1;
+  string value = 2;
+  string currency = 3;
+}
+message EnrollmentRequest {
+  string userId = 1;
+  string courseId = 2;
+
+}
+message EnrollmentResponse {
+}
+message GetCourseContentRequest {
+    string userId = 1;
+    string courseId = 2;
+}
+message GetCourseContentResponse {
+  Course course = 1;
+}
+message GetEnrollmentsRequest {
+  string userId = 1;
+}
+message Enrollment {
+  string CourseId = 1;
+  string title = 2;
+  Image thumbnail = 3;
+}
+message GetEnrollmentsResponse {
+    repeated Enrollment enrollments = 1;
+}
+message GetPricesRequest {
+
+}
+message  GetPricesResponse {
+  repeated price prices = 1;
+}
+message PublishCourseRequest {
+  string courseId = 1;
+  string userId = 2;
+}
+message PublishCourseResponse {
+  repeated string errorsValidate = 1;
+}
+message GetCourseWithInstructorRequest {
+  string userId = 1;
+}
+message GetCourseWithInstructorResponse {
+  repeated Course courses = 1;
+}
+message DeleteCourseRequest {
+  string courseId = 1;
+  string userId = 2;
+}
+message DeleteCourseResponse {
+}
+message FilterRequest {
+  string categoryId = 1;
+}
+message SearchRequest {
+  string query = 1;
+}
