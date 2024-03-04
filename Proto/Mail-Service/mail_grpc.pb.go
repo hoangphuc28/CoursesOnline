@@ -4,7 +4,7 @@
 // - protoc             v3.21.12
 // source: Mail-Service/mail.proto
 
-package pb
+package mail
 
 import (
 	context "context"

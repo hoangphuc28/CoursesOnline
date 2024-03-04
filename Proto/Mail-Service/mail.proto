@@ -1,6 +1,6 @@
 syntax = "proto3";
 package mail;
-option go_package = "github.com/Zhoangp/Mail-service/pb";
+option go_package = "github.com/Zhoangp/Mail-service/mail";
 
 service MailService {
   rpc SendTokenVerifyAccount(SendTokenVerifyAccountRequest) returns(SendTokenVerifyAccountResponse);

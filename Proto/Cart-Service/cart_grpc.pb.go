@@ -4,7 +4,7 @@
 // - protoc             v3.21.12
 // source: Cart-Service/cart.proto
 
-package Cart_Service
+package cart
 
 import (
 	context "context"

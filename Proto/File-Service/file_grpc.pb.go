@@ -4,7 +4,7 @@
 // - protoc             v3.21.12
 // source: File-Service/file.proto
 
-package pb
+package file
 
 import (
 	context "context"

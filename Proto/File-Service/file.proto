@@ -1,6 +1,6 @@
 syntax = "proto3";
 package file;
-option go_package = "github.com/Zhoangp/User-Service/pb";
+option go_package = "github.com/Zhoangp/User-Service/file";
 
 service FileService{
   rpc UploadAvatar(UploadAvatarRequest) returns (UploadAvatarResponse);
