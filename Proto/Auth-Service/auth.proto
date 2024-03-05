@@ -1,9 +1,9 @@
 syntax = "proto3";
 package auth;
-
+import "Error/error.proto";
 option go_package="github.com/hoangphuc28/CoursesOnline/Proto/auth";
 service AuthService {
-  rpc Register(RegisterRequest)returns(User);
+  rpc Register(RegisterRequest)returns(RegisterResponse);
   rpc Login(LoginRequest)returns(LoginResponse);
   rpc Validate(ValidateRequest)returns(ValidateResponse);
   rpc NewToken(NewTokenRequest)returns(NewTokenResponse);
@@ -36,6 +36,9 @@ message RegisterRequest {
   string address = 6;
   string role = 7;
 }
+message RegisterResponse {
+  err.ErrorResponse error = 1;
+}
 message LoginRequest {
   string email = 1;
   string password = 2;
@@ -46,6 +49,7 @@ message LoginResponse {
   string refreshToken = 3;
   uint32 expiresAt = 4;
   string tokenType = 5;
+  err.ErrorResponse error = 6;
 }
 
 message ValidateRequest {
@@ -53,6 +57,7 @@ message ValidateRequest {
 }
 message ValidateResponse {
   int64 userId = 1;
+  err.ErrorResponse error = 2;
 }
 
 message NewTokenRequest {
@@ -61,11 +66,12 @@ message NewTokenRequest {
 message NewTokenResponse {
   string accessToken = 1;
   uint32 expiresAt = 2;
+  err.ErrorResponse error = 3;
 }
 message VerifyAccountRequest {
   string email = 1;
   string password = 2;
 }
 message VerifyAccountResponse {
+  err.ErrorResponse error = 1;
 }
-
