@@ -1,6 +1,6 @@
 syntax = "proto3";
 package course;
-option go_package = "github.com/Zhoangp/Course-Service/v1.1/course";
+option go_package = "github.com/hoangphuc28/CoursesOnline/Proto/course";
 import "User-Service/user.proto";
 import "Error/error.proto";
 
