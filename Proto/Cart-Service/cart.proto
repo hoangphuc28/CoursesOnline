@@ -1,6 +1,6 @@
 syntax = "proto3";
 package cart;
-option go_package = "github.com/hoangphuc28/CoursesOnline/Proto/cart";
+option go_package = "github.com/hoangphuc28/CoursesOnline/Proto/v1.1/cart";
 import "Error/error.proto";
 
 service CartService {

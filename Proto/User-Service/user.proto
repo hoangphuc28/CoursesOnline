@@ -1,6 +1,6 @@
 syntax = "proto3";
 package user;
-option go_package = "github.com/hoangphuc28/CoursesOnline/Proto/User-Service";
+option go_package = "github.com/hoangphuc28/CoursesOnline/Proto/v1.1/User-Service";
 import "Error/error.proto";
 service UserService {
   rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse);

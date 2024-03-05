@@ -1,6 +1,6 @@
 syntax = "proto3";
 package mail;
-option go_package = "github.com/Zhoangp/Mail-service/mail";
+option go_package = "github.com/Zhoangp/Mail-service/v1.1/mail";
 import "Error/error.proto";
 
 service MailService {

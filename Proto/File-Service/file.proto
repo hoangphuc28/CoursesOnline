@@ -1,6 +1,6 @@
 syntax = "proto3";
 package file;
-option go_package = "github.com/Zhoangp/User-Service/file";
+option go_package = "github.com/Zhoangp/User-Service/v1.1/file";
 import "Error/error.proto";
 
 service FileService{
