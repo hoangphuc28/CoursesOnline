@@ -1,12 +1,12 @@
 syntax = "proto3";
 package cart;
 option go_package = "github.com/hoangphuc28/CoursesOnline/Proto/cart";
+import "Error/error.proto";
+
 service CartService {
   rpc GetCart(GetCartRequest) returns(GetCartResponse);
-  rpc AddItem(CartItemRequest) returns(Cart);
-  rpc RemoveItem(CartItemRequest) returns(Cart);
-  rpc ResetCart(ResetCartRequest) returns(Cart);
-  rpc CreateCart(CreateCartRequest) returns(Cart);
+  rpc AddItem(CartItemRequest) returns(CartItemResponse);
+  rpc RemoveItem(CartItemRequest) returns(CartItemResponse);
 }
 
 message Image {
@@ -40,21 +40,12 @@ message GetCartRequest {
 message GetCartResponse {
   Cart cart = 1;
   string totalCourse = 2;
+  err.ErrorResponse error = 3;
 }
 message CartItemRequest {
   string cartId = 1;
   string courseId = 2;
 }
-
-
-message ErrorResponse {
-  int64 code = 1;
-  string message = 2;
-}
-message ResetCartRequest {
-  string cartId = 1;
-}
-
-message CreateCartRequest {
-  string userId = 1;
+message CartItemResponse {
+  err.ErrorResponse error = 1;
 }

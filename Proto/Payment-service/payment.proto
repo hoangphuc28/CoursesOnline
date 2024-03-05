@@ -1,6 +1,8 @@
 syntax = "proto3";
 package payment;
 option go_package="github.com/Zhoangp/Payment-Service/payment";
+import "Error/error.proto";
+
 service PaymentService{
   rpc CheckOutWithPaypal(CheckoutRequest) returns(CheckoutResponse);
   rpc CaptureWithPaypal(CaptureRequest) returns(CaptureResponse);
@@ -12,6 +14,7 @@ service PaymentService{
 }
 
 message RefundResponse {
+  err.ErrorResponse error = 1;
 }
 message RefundRequest {
   string userId = 1;
@@ -26,6 +29,7 @@ message CheckoutRequest {
 message CheckoutResponse {
   Links links = 1;
   Token orderToken = 2;
+  err.ErrorResponse error = 3;
 }
 
 message Links {
@@ -47,6 +51,7 @@ message CaptureRequest {
   string token = 2;
 }
 message CaptureResponse {
+  err.ErrorResponse error = 1;
 }
 message ConnectPaypalRequest {
   Token identifyToken = 1;
@@ -54,6 +59,7 @@ message ConnectPaypalRequest {
 }
 message ConnectPaypalResponse {
   string email = 1;
+  err.ErrorResponse error = 2;
 }
 
 message GetPaymentRequest {
@@ -74,11 +80,13 @@ message Payment {
   string refundStatus = 6;
 }
 message GetPaymentResponse {
-repeated Payment payment =1;
+  repeated Payment payment =1;
+  err.ErrorResponse error = 2;
 }
 message GetPayalRequest {
   string userId = 1;
 }
 message GetPayalResponse {
   string email = 1;
+  err.ErrorResponse error = 2;
 }

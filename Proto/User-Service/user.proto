@@ -1,12 +1,13 @@
 syntax = "proto3";
 package user;
 option go_package = "github.com/hoangphuc28/CoursesOnline/Proto/User-Service";
+import "Error/error.proto";
 service UserService {
-  rpc UpdateUser(UpdateUserRequest) returns (User);
+  rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse);
   rpc GetTokenResetPass(GetTokenResetPassRequest) returns (GetTokenResetPassResponse);
   rpc ChangePassword(ChangePasswordRequest) returns (ChangePasswordResponse);
   rpc UpdateAvatar(UpdateAvatarRequest) returns (UpdateAvatarResponse);
-  rpc NewInstructor(NewInstructorRequest) returns (Instructor);
+  rpc NewInstructor(NewInstructorRequest) returns (NewInstructorResponse);
   rpc GetInstructor(GetInstructorInformationRequest) returns (GetInstructorInformationResponse);
   rpc GetProfile(GetUserInformationRequest) returns (GetProfileResponse);
   rpc GetProfileInstructor(GetUserInformationRequest) returns (GetProfileInstructorResponse);
@@ -40,23 +41,23 @@ message Picture {
   string width = 3;
   string height = 4;
 }
-
+message UpdateUserResponse {
+  err.ErrorResponse error = 1;
+}
 message  GetTokenResetPassRequest {
   string email = 1;
 }
 message GetTokenResetPassResponse {
-
+  err.ErrorResponse error = 1;
 }
-
 message ChangePasswordRequest {
   string password = 1;
   string new_password = 2;
   string email = 3;
 }
 message ChangePasswordResponse {
-
+  err.ErrorResponse error = 1;
 }
-
 message UpdateAvatarRequest {
   string fileName = 1;
   int64 size = 2;
@@ -68,6 +69,7 @@ message UpdateAvatarRequest {
 }
 message UpdateAvatarResponse {
   string url = 1;
+  err.ErrorResponse error = 2;
 }
 message NewInstructorRequest {
   string email = 1;
@@ -76,7 +78,9 @@ message NewInstructorRequest {
   string youtube = 4;
   string bio = 5;
 }
-
+message NewInstructorResponse {
+  err.ErrorResponse error = 1;
+}
 
 message GetInstructorInformationRequest {
   string id = 1;
@@ -97,9 +101,11 @@ message Instructor {
   string NumReviews = 11;
   string TotalCourses = 12;
   Picture avt = 13;
+  err.ErrorResponse error = 14;
 }
 message GetInstructorInformationResponse {
   Instructor information = 2;
+  err.ErrorResponse error = 3;
 }
 
 message GetUserInformationRequest {
@@ -107,6 +113,7 @@ message GetUserInformationRequest {
 }
 message GetProfileResponse {
   User information = 1;
+  err.ErrorResponse error = 2;
 }
 message GetProfileInstructorResponse {
   string accountPaypal = 1;
@@ -114,4 +121,5 @@ message GetProfileInstructorResponse {
   string  linkedin = 3;
   string youtube = 4;
   string bio = 5;
+  err.ErrorResponse error = 6;
 }

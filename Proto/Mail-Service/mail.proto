@@ -1,6 +1,7 @@
 syntax = "proto3";
 package mail;
 option go_package = "github.com/Zhoangp/Mail-service/mail";
+import "Error/error.proto";
 
 service MailService {
   rpc SendTokenVerifyAccount(SendTokenVerifyAccountRequest) returns(SendTokenVerifyAccountResponse);
@@ -17,13 +18,13 @@ message SendTokenVerifyAccountRequest {
   string url = 4;
 }
 message SendTokenVerifyAccountResponse {
-  ErrorResponse error = 1;
+  err.ErrorResponse error = 1;
 }
 message SendTokenResetPasswordRequest {
   Mail mail = 1;
 }
 message SendTokenResetPasswordResponse {
-  ErrorResponse error = 1;
+  err.ErrorResponse error = 1;
 
 }
 message ErrorResponse {

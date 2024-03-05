@@ -1,6 +1,7 @@
 syntax = "proto3";
 package file;
 option go_package = "github.com/Zhoangp/User-Service/file";
+import "Error/error.proto";
 
 service FileService{
   rpc UploadAvatar(UploadAvatarRequest) returns (UploadAvatarResponse);
@@ -18,7 +19,7 @@ message UploadAvatarRequest {
 }
 message UploadAvatarResponse {
   string url = 1;
-  ErrorResponse error = 2;
+  err.ErrorResponse error = 2;
 }
 
 message UploadAssetRequest {

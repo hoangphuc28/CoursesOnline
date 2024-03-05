@@ -2,22 +2,22 @@ syntax = "proto3";
 package course;
 option go_package = "github.com/Zhoangp/Course-Service/course";
 import "User-Service/user.proto";
-service CourseService {
+import "Error/error.proto";
 
-  //Course service
+service CourseService {
   rpc GetCourses(GetCoursesRequest) returns (GetCoursesResponse);
   rpc GetCourse(GetCourseRequest) returns (GetCourseResponse);
   rpc GetAllCategories(GetAllCategoriesRequest) returns(GetAllCategoriesResponse);
-  rpc CreateCourse(CreateCourseRequest) returns (CreateCourseResponse);
   rpc Enrollment(EnrollmentRequest) returns (EnrollmentResponse);
   rpc GetCourseContent(GetCourseContentRequest) returns (GetCourseContentResponse);
   rpc GetEnrollments(GetEnrollmentsRequest) returns (GetEnrollmentsResponse);
+  rpc CreateCourse(CreateCourseRequest) returns (CreateCourseResponse);
   rpc GetPrices(GetPricesRequest) returns (GetPricesResponse);
   rpc UpdateCourse(UpdateCourseRequest) returns (UpdateCourseResponse);
   rpc PublishCourse(PublishCourseRequest) returns (PublishCourseResponse);
   rpc GetCourseWithInstructor(GetCourseWithInstructorRequest) returns (GetCourseWithInstructorResponse);
   rpc DeleteCourse(DeleteCourseRequest) returns (DeleteCourseResponse);
-  rpc FilterCourses(FilterRequest) returns(GetCoursesResponse);
+
 
   //Section service
   rpc CreateSection(CreateSectionRequest) returns (CreateSectionResponse);
@@ -32,7 +32,9 @@ service CourseService {
   rpc DeleteLecture(DeleteLectureRequest) returns (Response);
 
   rpc CheckOwner(CheckOwnerRequest) returns (Response);
+
 }
+
 message CheckOwnerRequest {
   string userId = 1;
   string courseId = 2;
@@ -54,6 +56,7 @@ message CreateLectureRequest {
 }
 message CreateLectureResponse {
   string lectureId = 1;
+  err.ErrorResponse error = 2;
 
 }
 message GetSectionsRequest {
@@ -61,6 +64,7 @@ message GetSectionsRequest {
 }
 message GetSectionsResponse {
   repeated Section sections = 1;
+  err.ErrorResponse error = 2;
 }
 
 message DeleteSectionRequest {
@@ -76,10 +80,14 @@ message CreateSectionRequest {
 }
 message CreateSectionResponse {
   string sectionId = 1;
+  err.ErrorResponse error = 2;
 
 }
+
 message Response {
+  err.ErrorResponse error = 1;
 }
+
 message Image {
   string url = 1;
   string width = 2;
@@ -94,9 +102,7 @@ message Lecture {
   string title = 2;
   string content = 3;
   string status = 4;
-  Resource resource = 5;
-  int32 sort_order = 6;
-  bool is_free = 7;
+  Resource video = 5;
 }
 message Section {
   string id = 1;
@@ -104,10 +110,8 @@ message Section {
   int32 numberOfLectures = 3;
   repeated Lecture lectures = 4;
 }
-message coupon {
-  string id = 1;
-  string percent = 2;
-  string code = 3;
+message Goal {
+  string content = 1;
 }
 
 message Course {
@@ -130,29 +134,47 @@ message Course {
   string AvgRating = 17;
   Image thumbnail = 18;
   user.Instructor instructor = 19;
-
 }
-message GetCoursesRequest {
-    int32 page = 1;
-    int32 pageSize = 2;
-}
-message GetCoursesResponse {
-  repeated link links = 1;
-  repeated Course courses = 2;
-  int32 courseLength =4;
-  int32 numPages = 5;
-}
-
-message GetCourseRequest {
+message coupon {
   string id = 1;
+  string percent = 2;
+  string code = 3;
+}
+
+message Instructor {
+  string id = 1;
+  string name = 2;
+
+}
+message price {
+  string id = 1;
+  string value = 2;
+  string currency = 3;
+
 }
 message link {
   string href = 1;
   string rel = 2;
   string method = 3;
 }
+message GetCoursesRequest {
+  int32 page = 1;
+  int32 pageSize = 2;
+}
+message GetCoursesResponse {
+  repeated link links = 1;
+  repeated Course courses = 2;
+  int32 courseLength =4;
+  int32 numPages = 5;
+  err.ErrorResponse error = 6;
+}
+
+message GetCourseRequest {
+  string id = 1;
+}
 message GetCourseResponse {
   Course course = 1;
+  err.ErrorResponse error = 2;
 }
 message Category {
   string id = 1;
@@ -169,19 +191,39 @@ message GetAllCategoriesRequest {
 }
 message GetAllCategoriesResponse {
   repeated Category categories = 1;
+  err.ErrorResponse error = 2;
 }
-message Goal {
-  string content = 1;
+message EnrollmentRequest {
+  string userId = 1;
+  string courseId = 2;
+
 }
-enum Level {
-  All_Level = 0;
-  Beginner = 1;
-  Intermediate = 2;
-  Expert = 3;
+message EnrollmentResponse {
+  err.ErrorResponse error = 1;
 }
-enum Language {
-  VN = 0;
-  EN = 1;
+message GetCourseContentRequest {
+  string userId = 1;
+  string courseId = 2;
+}
+message GetCourseContentResponse {
+  Course course = 1;
+  err.ErrorResponse error = 2;
+}
+message GetEnrollmentsRequest {
+  string userId = 1;
+}
+message Enrollment {
+  string CourseId = 1;
+  string title = 2;
+  Image thumbnail = 3;
+}
+message GetEnrollmentsResponse {
+  repeated Enrollment enrollments = 1;
+  err.ErrorResponse error = 2;
+}
+message UpdateCourseResponse {
+  err.ErrorResponse error = 1;
+
 }
 message UpdateCourseRequest {
   string title = 1;
@@ -198,9 +240,6 @@ message UpdateCourseRequest {
   string instructorId = 12;
   string courseId = 13;
 }
-message UpdateCourseResponse {
-
-}
 message CreateCourseRequest {
   string title = 1;
   string SubCategoryId = 2;
@@ -208,46 +247,14 @@ message CreateCourseRequest {
 }
 message CreateCourseResponse {
   string courseId = 1;
-}
-enum currency {
-  VND = 0;
-  USD = 1;
-}
-message price {
-  string id = 1;
-  string value = 2;
-  string currency = 3;
-}
-message EnrollmentRequest {
-  string userId = 1;
-  string courseId = 2;
-
-}
-message EnrollmentResponse {
-}
-message GetCourseContentRequest {
-    string userId = 1;
-    string courseId = 2;
-}
-message GetCourseContentResponse {
-  Course course = 1;
-}
-message GetEnrollmentsRequest {
-  string userId = 1;
-}
-message Enrollment {
-  string CourseId = 1;
-  string title = 2;
-  Image thumbnail = 3;
-}
-message GetEnrollmentsResponse {
-    repeated Enrollment enrollments = 1;
+  err.ErrorResponse error = 2;
 }
 message GetPricesRequest {
 
 }
 message  GetPricesResponse {
   repeated price prices = 1;
+  err.ErrorResponse error = 2;
 }
 message PublishCourseRequest {
   string courseId = 1;
@@ -255,22 +262,20 @@ message PublishCourseRequest {
 }
 message PublishCourseResponse {
   repeated string errorsValidate = 1;
+
+  err.ErrorResponse error = 2;
 }
 message GetCourseWithInstructorRequest {
   string userId = 1;
 }
 message GetCourseWithInstructorResponse {
   repeated Course courses = 1;
+  err.ErrorResponse error = 2;
 }
 message DeleteCourseRequest {
   string courseId = 1;
   string userId = 2;
 }
 message DeleteCourseResponse {
-}
-message FilterRequest {
-  string categoryId = 1;
-}
-message SearchRequest {
-  string query = 1;
+  err.ErrorResponse error = 1;
 }

@@ -22,20 +22,18 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type CourseServiceClient interface {
-	// Course service
 	GetCourses(ctx context.Context, in *GetCoursesRequest, opts ...grpc.CallOption) (*GetCoursesResponse, error)
 	GetCourse(ctx context.Context, in *GetCourseRequest, opts ...grpc.CallOption) (*GetCourseResponse, error)
 	GetAllCategories(ctx context.Context, in *GetAllCategoriesRequest, opts ...grpc.CallOption) (*GetAllCategoriesResponse, error)
-	CreateCourse(ctx context.Context, in *CreateCourseRequest, opts ...grpc.CallOption) (*CreateCourseResponse, error)
 	Enrollment(ctx context.Context, in *EnrollmentRequest, opts ...grpc.CallOption) (*EnrollmentResponse, error)
 	GetCourseContent(ctx context.Context, in *GetCourseContentRequest, opts ...grpc.CallOption) (*GetCourseContentResponse, error)
 	GetEnrollments(ctx context.Context, in *GetEnrollmentsRequest, opts ...grpc.CallOption) (*GetEnrollmentsResponse, error)
+	CreateCourse(ctx context.Context, in *CreateCourseRequest, opts ...grpc.CallOption) (*CreateCourseResponse, error)
 	GetPrices(ctx context.Context, in *GetPricesRequest, opts ...grpc.CallOption) (*GetPricesResponse, error)
 	UpdateCourse(ctx context.Context, in *UpdateCourseRequest, opts ...grpc.CallOption) (*UpdateCourseResponse, error)
 	PublishCourse(ctx context.Context, in *PublishCourseRequest, opts ...grpc.CallOption) (*PublishCourseResponse, error)
 	GetCourseWithInstructor(ctx context.Context, in *GetCourseWithInstructorRequest, opts ...grpc.CallOption) (*GetCourseWithInstructorResponse, error)
 	DeleteCourse(ctx context.Context, in *DeleteCourseRequest, opts ...grpc.CallOption) (*DeleteCourseResponse, error)
-	FilterCourses(ctx context.Context, in *FilterRequest, opts ...grpc.CallOption) (*GetCoursesResponse, error)
 	// Section service
 	CreateSection(ctx context.Context, in *CreateSectionRequest, opts ...grpc.CallOption) (*CreateSectionResponse, error)
 	UpdateSection(ctx context.Context, in *UpdateSectionRequest, opts ...grpc.CallOption) (*Response, error)
@@ -83,15 +81,6 @@ func (c *courseServiceClient) GetAllCategories(ctx context.Context, in *GetAllCa
 	return out, nil
 }
 
-func (c *courseServiceClient) CreateCourse(ctx context.Context, in *CreateCourseRequest, opts ...grpc.CallOption) (*CreateCourseResponse, error) {
-	out := new(CreateCourseResponse)
-	err := c.cc.Invoke(ctx, "/course.CourseService/CreateCourse", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *courseServiceClient) Enrollment(ctx context.Context, in *EnrollmentRequest, opts ...grpc.CallOption) (*EnrollmentResponse, error) {
 	out := new(EnrollmentResponse)
 	err := c.cc.Invoke(ctx, "/course.CourseService/Enrollment", in, out, opts...)
@@ -113,6 +102,15 @@ func (c *courseServiceClient) GetCourseContent(ctx context.Context, in *GetCours
 func (c *courseServiceClient) GetEnrollments(ctx context.Context, in *GetEnrollmentsRequest, opts ...grpc.CallOption) (*GetEnrollmentsResponse, error) {
 	out := new(GetEnrollmentsResponse)
 	err := c.cc.Invoke(ctx, "/course.CourseService/GetEnrollments", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *courseServiceClient) CreateCourse(ctx context.Context, in *CreateCourseRequest, opts ...grpc.CallOption) (*CreateCourseResponse, error) {
+	out := new(CreateCourseResponse)
+	err := c.cc.Invoke(ctx, "/course.CourseService/CreateCourse", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -158,15 +156,6 @@ func (c *courseServiceClient) GetCourseWithInstructor(ctx context.Context, in *G
 func (c *courseServiceClient) DeleteCourse(ctx context.Context, in *DeleteCourseRequest, opts ...grpc.CallOption) (*DeleteCourseResponse, error) {
 	out := new(DeleteCourseResponse)
 	err := c.cc.Invoke(ctx, "/course.CourseService/DeleteCourse", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *courseServiceClient) FilterCourses(ctx context.Context, in *FilterRequest, opts ...grpc.CallOption) (*GetCoursesResponse, error) {
-	out := new(GetCoursesResponse)
-	err := c.cc.Invoke(ctx, "/course.CourseService/FilterCourses", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -249,20 +238,18 @@ func (c *courseServiceClient) CheckOwner(ctx context.Context, in *CheckOwnerRequ
 // All implementations must embed UnimplementedCourseServiceServer
 // for forward compatibility
 type CourseServiceServer interface {
-	// Course service
 	GetCourses(context.Context, *GetCoursesRequest) (*GetCoursesResponse, error)
 	GetCourse(context.Context, *GetCourseRequest) (*GetCourseResponse, error)
 	GetAllCategories(context.Context, *GetAllCategoriesRequest) (*GetAllCategoriesResponse, error)
-	CreateCourse(context.Context, *CreateCourseRequest) (*CreateCourseResponse, error)
 	Enrollment(context.Context, *EnrollmentRequest) (*EnrollmentResponse, error)
 	GetCourseContent(context.Context, *GetCourseContentRequest) (*GetCourseContentResponse, error)
 	GetEnrollments(context.Context, *GetEnrollmentsRequest) (*GetEnrollmentsResponse, error)
+	CreateCourse(context.Context, *CreateCourseRequest) (*CreateCourseResponse, error)
 	GetPrices(context.Context, *GetPricesRequest) (*GetPricesResponse, error)
 	UpdateCourse(context.Context, *UpdateCourseRequest) (*UpdateCourseResponse, error)
 	PublishCourse(context.Context, *PublishCourseRequest) (*PublishCourseResponse, error)
 	GetCourseWithInstructor(context.Context, *GetCourseWithInstructorRequest) (*GetCourseWithInstructorResponse, error)
 	DeleteCourse(context.Context, *DeleteCourseRequest) (*DeleteCourseResponse, error)
-	FilterCourses(context.Context, *FilterRequest) (*GetCoursesResponse, error)
 	// Section service
 	CreateSection(context.Context, *CreateSectionRequest) (*CreateSectionResponse, error)
 	UpdateSection(context.Context, *UpdateSectionRequest) (*Response, error)
@@ -289,9 +276,6 @@ func (UnimplementedCourseServiceServer) GetCourse(context.Context, *GetCourseReq
 func (UnimplementedCourseServiceServer) GetAllCategories(context.Context, *GetAllCategoriesRequest) (*GetAllCategoriesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAllCategories not implemented")
 }
-func (UnimplementedCourseServiceServer) CreateCourse(context.Context, *CreateCourseRequest) (*CreateCourseResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateCourse not implemented")
-}
 func (UnimplementedCourseServiceServer) Enrollment(context.Context, *EnrollmentRequest) (*EnrollmentResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Enrollment not implemented")
 }
@@ -300,6 +284,9 @@ func (UnimplementedCourseServiceServer) GetCourseContent(context.Context, *GetCo
 }
 func (UnimplementedCourseServiceServer) GetEnrollments(context.Context, *GetEnrollmentsRequest) (*GetEnrollmentsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetEnrollments not implemented")
+}
+func (UnimplementedCourseServiceServer) CreateCourse(context.Context, *CreateCourseRequest) (*CreateCourseResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateCourse not implemented")
 }
 func (UnimplementedCourseServiceServer) GetPrices(context.Context, *GetPricesRequest) (*GetPricesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPrices not implemented")
@@ -315,9 +302,6 @@ func (UnimplementedCourseServiceServer) GetCourseWithInstructor(context.Context,
 }
 func (UnimplementedCourseServiceServer) DeleteCourse(context.Context, *DeleteCourseRequest) (*DeleteCourseResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteCourse not implemented")
-}
-func (UnimplementedCourseServiceServer) FilterCourses(context.Context, *FilterRequest) (*GetCoursesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method FilterCourses not implemented")
 }
 func (UnimplementedCourseServiceServer) CreateSection(context.Context, *CreateSectionRequest) (*CreateSectionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateSection not implemented")
@@ -410,24 +394,6 @@ func _CourseService_GetAllCategories_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
-func _CourseService_CreateCourse_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateCourseRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CourseServiceServer).CreateCourse(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/course.CourseService/CreateCourse",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CourseServiceServer).CreateCourse(ctx, req.(*CreateCourseRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _CourseService_Enrollment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(EnrollmentRequest)
 	if err := dec(in); err != nil {
@@ -478,6 +444,24 @@ func _CourseService_GetEnrollments_Handler(srv interface{}, ctx context.Context,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(CourseServiceServer).GetEnrollments(ctx, req.(*GetEnrollmentsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CourseService_CreateCourse_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateCourseRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CourseServiceServer).CreateCourse(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/course.CourseService/CreateCourse",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CourseServiceServer).CreateCourse(ctx, req.(*CreateCourseRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -568,24 +552,6 @@ func _CourseService_DeleteCourse_Handler(srv interface{}, ctx context.Context, d
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(CourseServiceServer).DeleteCourse(ctx, req.(*DeleteCourseRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _CourseService_FilterCourses_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(FilterRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CourseServiceServer).FilterCourses(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/course.CourseService/FilterCourses",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CourseServiceServer).FilterCourses(ctx, req.(*FilterRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -754,10 +720,6 @@ var CourseService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _CourseService_GetAllCategories_Handler,
 		},
 		{
-			MethodName: "CreateCourse",
-			Handler:    _CourseService_CreateCourse_Handler,
-		},
-		{
 			MethodName: "Enrollment",
 			Handler:    _CourseService_Enrollment_Handler,
 		},
@@ -768,6 +730,10 @@ var CourseService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetEnrollments",
 			Handler:    _CourseService_GetEnrollments_Handler,
+		},
+		{
+			MethodName: "CreateCourse",
+			Handler:    _CourseService_CreateCourse_Handler,
 		},
 		{
 			MethodName: "GetPrices",
@@ -788,10 +754,6 @@ var CourseService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteCourse",
 			Handler:    _CourseService_DeleteCourse_Handler,
-		},
-		{
-			MethodName: "FilterCourses",
-			Handler:    _CourseService_FilterCourses_Handler,
 		},
 		{
 			MethodName: "CreateSection",
