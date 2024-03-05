@@ -7,7 +7,7 @@
 package cart
 
 import (
-	Error "github.com/hoangphuc28/CoursesOnline/Proto/v1.1/Error"
+	Error "github.com/hoangphuc28/CoursesOnline/Proto/Error"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
