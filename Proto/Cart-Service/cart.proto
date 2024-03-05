@@ -7,6 +7,9 @@ service CartService {
   rpc GetCart(GetCartRequest) returns(GetCartResponse);
   rpc AddItem(CartItemRequest) returns(CartItemResponse);
   rpc RemoveItem(CartItemRequest) returns(CartItemResponse);
+  rpc ResetCart(ResetCartRequest) returns(ResetCartResponse);
+  rpc CreateCart(CreateCartRequest) returns(CreateCartResponse);
+
 }
 
 message Image {
@@ -47,5 +50,22 @@ message CartItemRequest {
   string courseId = 2;
 }
 message CartItemResponse {
+  err.ErrorResponse error = 1;
+}
+
+message ErrorResponse {
+  int64 code = 1;
+  string message = 2;
+}
+message ResetCartRequest {
+  string cartId = 1;
+}
+message ResetCartResponse {
+  err.ErrorResponse error = 1;
+}
+message CreateCartRequest {
+  string userId = 1;
+}
+message CreateCartResponse {
   err.ErrorResponse error = 1;
 }
