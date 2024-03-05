@@ -1,6 +1,6 @@
 syntax = "proto3";
 package err;
-option go_package="github.com/hoangphuc28/CoursesOnline/Proto/err";
+option go_package="github.com/hoangphuc28/CoursesOnline/Proto/Error";
 message ErrorResponse {
   int64 code = 1;
   string message = 2;

@@ -1,7 +1,7 @@
 syntax = "proto3";
 package auth;
 import "Error/error.proto";
-option go_package="github.com/hoangphuc28/CoursesOnline/Proto/auth";
+option go_package="github.com/hoangphuc28/CoursesOnline/Proto/Auth-Service";
 service AuthService {
   rpc Register(RegisterRequest)returns(RegisterResponse);
   rpc Login(LoginRequest)returns(LoginResponse);

@@ -4,10 +4,10 @@
 // 	protoc        v3.21.12
 // source: Auth-Service/auth.proto
 
-package auth
+package Auth_Service
 
 import (
-	err "github.com/hoangphuc28/CoursesOnline/Proto/err"
+	Error "github.com/hoangphuc28/CoursesOnline/Proto/Error"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -295,7 +295,7 @@ type RegisterResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Error *err.ErrorResponse `protobuf:"bytes,1,opt,name=error,proto3" json:"error,omitempty"`
+	Error *Error.ErrorResponse `protobuf:"bytes,1,opt,name=error,proto3" json:"error,omitempty"`
 }
 
 func (x *RegisterResponse) Reset() {
@@ -330,7 +330,7 @@ func (*RegisterResponse) Descriptor() ([]byte, []int) {
 	return file_Auth_Service_auth_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *RegisterResponse) GetError() *err.ErrorResponse {
+func (x *RegisterResponse) GetError() *Error.ErrorResponse {
 	if x != nil {
 		return x.Error
 	}
@@ -397,12 +397,12 @@ type LoginResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Information  *User              `protobuf:"bytes,1,opt,name=information,proto3" json:"information,omitempty"`
-	AccessToken  string             `protobuf:"bytes,2,opt,name=accessToken,proto3" json:"accessToken,omitempty"`
-	RefreshToken string             `protobuf:"bytes,3,opt,name=refreshToken,proto3" json:"refreshToken,omitempty"`
-	ExpiresAt    uint32             `protobuf:"varint,4,opt,name=expiresAt,proto3" json:"expiresAt,omitempty"`
-	TokenType    string             `protobuf:"bytes,5,opt,name=tokenType,proto3" json:"tokenType,omitempty"`
-	Error        *err.ErrorResponse `protobuf:"bytes,6,opt,name=error,proto3" json:"error,omitempty"`
+	Information  *User                `protobuf:"bytes,1,opt,name=information,proto3" json:"information,omitempty"`
+	AccessToken  string               `protobuf:"bytes,2,opt,name=accessToken,proto3" json:"accessToken,omitempty"`
+	RefreshToken string               `protobuf:"bytes,3,opt,name=refreshToken,proto3" json:"refreshToken,omitempty"`
+	ExpiresAt    uint32               `protobuf:"varint,4,opt,name=expiresAt,proto3" json:"expiresAt,omitempty"`
+	TokenType    string               `protobuf:"bytes,5,opt,name=tokenType,proto3" json:"tokenType,omitempty"`
+	Error        *Error.ErrorResponse `protobuf:"bytes,6,opt,name=error,proto3" json:"error,omitempty"`
 }
 
 func (x *LoginResponse) Reset() {
@@ -472,7 +472,7 @@ func (x *LoginResponse) GetTokenType() string {
 	return ""
 }
 
-func (x *LoginResponse) GetError() *err.ErrorResponse {
+func (x *LoginResponse) GetError() *Error.ErrorResponse {
 	if x != nil {
 		return x.Error
 	}
@@ -531,8 +531,8 @@ type ValidateResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	UserId int64              `protobuf:"varint,1,opt,name=userId,proto3" json:"userId,omitempty"`
-	Error  *err.ErrorResponse `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
+	UserId int64                `protobuf:"varint,1,opt,name=userId,proto3" json:"userId,omitempty"`
+	Error  *Error.ErrorResponse `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
 }
 
 func (x *ValidateResponse) Reset() {
@@ -574,7 +574,7 @@ func (x *ValidateResponse) GetUserId() int64 {
 	return 0
 }
 
-func (x *ValidateResponse) GetError() *err.ErrorResponse {
+func (x *ValidateResponse) GetError() *Error.ErrorResponse {
 	if x != nil {
 		return x.Error
 	}
@@ -633,9 +633,9 @@ type NewTokenResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	AccessToken string             `protobuf:"bytes,1,opt,name=accessToken,proto3" json:"accessToken,omitempty"`
-	ExpiresAt   uint32             `protobuf:"varint,2,opt,name=expiresAt,proto3" json:"expiresAt,omitempty"`
-	Error       *err.ErrorResponse `protobuf:"bytes,3,opt,name=error,proto3" json:"error,omitempty"`
+	AccessToken string               `protobuf:"bytes,1,opt,name=accessToken,proto3" json:"accessToken,omitempty"`
+	ExpiresAt   uint32               `protobuf:"varint,2,opt,name=expiresAt,proto3" json:"expiresAt,omitempty"`
+	Error       *Error.ErrorResponse `protobuf:"bytes,3,opt,name=error,proto3" json:"error,omitempty"`
 }
 
 func (x *NewTokenResponse) Reset() {
@@ -684,7 +684,7 @@ func (x *NewTokenResponse) GetExpiresAt() uint32 {
 	return 0
 }
 
-func (x *NewTokenResponse) GetError() *err.ErrorResponse {
+func (x *NewTokenResponse) GetError() *Error.ErrorResponse {
 	if x != nil {
 		return x.Error
 	}
@@ -751,7 +751,7 @@ type VerifyAccountResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Error *err.ErrorResponse `protobuf:"bytes,1,opt,name=error,proto3" json:"error,omitempty"`
+	Error *Error.ErrorResponse `protobuf:"bytes,1,opt,name=error,proto3" json:"error,omitempty"`
 }
 
 func (x *VerifyAccountResponse) Reset() {
@@ -786,7 +786,7 @@ func (*VerifyAccountResponse) Descriptor() ([]byte, []int) {
 	return file_Auth_Service_auth_proto_rawDescGZIP(), []int{11}
 }
 
-func (x *VerifyAccountResponse) GetError() *err.ErrorResponse {
+func (x *VerifyAccountResponse) GetError() *Error.ErrorResponse {
 	if x != nil {
 		return x.Error
 	}
@@ -913,10 +913,11 @@ var file_Auth_Service_auth_proto_rawDesc = []byte{
 	0x75, 0x74, 0x68, 0x2e, 0x56, 0x65, 0x72, 0x69, 0x66, 0x79, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e,
 	0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1b, 0x2e, 0x61, 0x75, 0x74, 0x68, 0x2e,
 	0x56, 0x65, 0x72, 0x69, 0x66, 0x79, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x52, 0x65, 0x73,
-	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x42, 0x31, 0x5a, 0x2f, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e,
+	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x42, 0x39, 0x5a, 0x37, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e,
 	0x63, 0x6f, 0x6d, 0x2f, 0x68, 0x6f, 0x61, 0x6e, 0x67, 0x70, 0x68, 0x75, 0x63, 0x32, 0x38, 0x2f,
 	0x43, 0x6f, 0x75, 0x72, 0x73, 0x65, 0x73, 0x4f, 0x6e, 0x6c, 0x69, 0x6e, 0x65, 0x2f, 0x50, 0x72,
-	0x6f, 0x74, 0x6f, 0x2f, 0x61, 0x75, 0x74, 0x68, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x6f, 0x74, 0x6f, 0x2f, 0x41, 0x75, 0x74, 0x68, 0x2d, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65,
+	0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -945,7 +946,7 @@ var file_Auth_Service_auth_proto_goTypes = []interface{}{
 	(*NewTokenResponse)(nil),      // 9: auth.NewTokenResponse
 	(*VerifyAccountRequest)(nil),  // 10: auth.VerifyAccountRequest
 	(*VerifyAccountResponse)(nil), // 11: auth.VerifyAccountResponse
-	(*err.ErrorResponse)(nil),     // 12: err.ErrorResponse
+	(*Error.ErrorResponse)(nil),   // 12: err.ErrorResponse
 }
 var file_Auth_Service_auth_proto_depIdxs = []int32{
 	0,  // 0: auth.User.avatar:type_name -> auth.Picture
