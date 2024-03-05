@@ -27,7 +27,4 @@ message SendTokenResetPasswordResponse {
   err.ErrorResponse error = 1;
 
 }
-message ErrorResponse {
-  int64 code = 1;
-  string message = 2;
-}
+
