@@ -1,0 +1,13 @@
+app:
+  Version: 1.0.0
+  Mode: development
+  Port: 4000
+  Secret: go-courses
+aws:
+  Region: ap-northeast-1
+  APIKey: AKIAZINF6DDKZLXHIKRV
+  SecretKey: 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
+  S3Domain: https://d338hmodjsosv2.cloudfront.net
+  S3Bucket: courses-storages
+otherServices:
+  DurationVideo: localhost:4004

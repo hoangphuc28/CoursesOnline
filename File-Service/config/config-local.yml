@@ -1,0 +1,17 @@
+app:
+  Version: 1.0.0
+  Mode: development
+  Port: 4000
+  Secret: go-courses
+aws:
+  Region: ap-northeast-1
+  S3Domain: https://d338hmodjsosv2.cloudfront.net
+  S3Bucket: courses-storages
+  APIKey: AKIAZINF6DDKZLXHIKRV
+  SecretKey: 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
+firebase:
+  PathCredentialsFile: course-d9557-firebase-adminsdk-cm8xi-ef4274b604.json
+  Bucket: course-d9557.appspot.com
+otherServices:
+  DurationVideo: localhost:4004
+
