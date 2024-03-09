@@ -2,11 +2,13 @@ package userhttp
 
 import (
 	"context"
-	"github.com/Zhoangp/User-Service/config"
-	"github.com/Zhoangp/User-Service/internal/model"
-	"github.com/Zhoangp/User-Service/pb"
-	"github.com/Zhoangp/User-Service/pkg/client"
-	"github.com/Zhoangp/User-Service/pkg/common"
+	"github.com/hoangphuc28/CoursesOnline-ProtoFile/Error"
+	"github.com/hoangphuc28/CoursesOnline-ProtoFile/File"
+	pb "github.com/hoangphuc28/CoursesOnline-ProtoFile/User"
+	"github.com/hoangphuc28/CoursesOnline/User-Service/config"
+	"github.com/hoangphuc28/CoursesOnline/User-Service/internal/model"
+	"github.com/hoangphuc28/CoursesOnline/User-Service/pkg/client"
+	"github.com/hoangphuc28/CoursesOnline/User-Service/pkg/common"
 )
 
 type userHandler struct {
@@ -28,15 +30,15 @@ type UserUseCase interface {
 func NewUserHandler(userUC UserUseCase, cf *config.Config) *userHandler {
 	return &userHandler{UC: userUC, Cf: cf}
 }
-func HandleError(err error) *pb.ErrorResponse {
+func HandleError(err error) *Error.ErrorResponse {
 	if errors, ok := err.(*common.AppError); ok {
-		return &pb.ErrorResponse{
+		return &Error.ErrorResponse{
 			Code:    int64(errors.StatusCode),
 			Message: errors.Message,
 		}
 	}
 	appErr := common.ErrInternal(err.(error))
-	return &pb.ErrorResponse{
+	return &Error.ErrorResponse{
 		Code:    int64(appErr.StatusCode),
 		Message: appErr.Message,
 	}
@@ -64,8 +66,8 @@ func (userHandler *userHandler) UpdateAvatar(ctx context.Context, req *pb.Update
 		}, nil
 	}
 
-	res, err := cli.UploadAvatar(ctx, &pb.UploadAvatarRequest{
-		File: &pb.File{
+	res, err := cli.UploadAvatar(ctx, &File.UploadAvatarRequest{
+		File: &File.File{
 			FileName: req.FileName,
 			Size:     req.Size,
 			Content:  req.Content,

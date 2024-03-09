@@ -1,8 +1,8 @@
 package repo
 
 import (
-	"github.com/Zhoangp/User-Service/internal/model"
-	"github.com/Zhoangp/User-Service/pkg/common"
+	"github.com/hoangphuc28/CoursesOnline/User-Service/internal/model"
+	"github.com/hoangphuc28/CoursesOnline/User-Service/pkg/common"
 	"gorm.io/gorm"
 )
 

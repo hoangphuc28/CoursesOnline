@@ -3,8 +3,10 @@ package userhttp
 import (
 	"context"
 	"fmt"
-	"github.com/Zhoangp/User-Service/pb"
-	"github.com/Zhoangp/User-Service/pkg/client"
+	payment "github.com/hoangphuc28/CoursesOnline-ProtoFile/Payment"
+	pb "github.com/hoangphuc28/CoursesOnline-ProtoFile/User"
+
+	"github.com/hoangphuc28/CoursesOnline/User-Service/pkg/client"
 )
 
 func (hdl *userHandler) GetProfileInstructor(ctx context.Context, req *pb.GetUserInformationRequest) (*pb.GetProfileInstructorResponse, error) {
@@ -18,7 +20,7 @@ func (hdl *userHandler) GetProfileInstructor(ctx context.Context, req *pb.GetUse
 	if err != nil {
 		return &pb.GetProfileInstructorResponse{Error: HandleError(err)}, err
 	}
-	res, err := paypalService.GetPaypal(ctx, &pb.GetPayalRequest{UserId: req.UserId})
+	res, err := paypalService.GetPaypal(ctx, &payment.GetPayalRequest{UserId: req.UserId})
 	if err != nil {
 		fmt.Println(err)
 

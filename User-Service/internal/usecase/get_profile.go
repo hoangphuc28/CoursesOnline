@@ -1,6 +1,6 @@
 package usecase
 
-import "github.com/Zhoangp/User-Service/pb"
+import pb "github.com/hoangphuc28/CoursesOnline-ProtoFile/User"
 
 func (uc *userUseCase) GetProfile(userId string) (*pb.GetProfileResponse, error) {
 	userIdDecoded, err := uc.h.Decode(userId)

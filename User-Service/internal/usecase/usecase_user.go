@@ -1,12 +1,12 @@
 package usecase
 
 import (
-	"github.com/Zhoangp/User-Service/config"
-	"github.com/Zhoangp/User-Service/internal/model"
-	"github.com/Zhoangp/User-Service/internal/repo"
-	"github.com/Zhoangp/User-Service/pb"
-	"github.com/Zhoangp/User-Service/pkg/common"
-	"github.com/Zhoangp/User-Service/pkg/utils"
+	"github.com/hoangphuc28/CoursesOnline-ProtoFile/User"
+	"github.com/hoangphuc28/CoursesOnline/User-Service/config"
+	"github.com/hoangphuc28/CoursesOnline/User-Service/internal/model"
+	"github.com/hoangphuc28/CoursesOnline/User-Service/internal/repo"
+	"github.com/hoangphuc28/CoursesOnline/User-Service/pkg/common"
+	"github.com/hoangphuc28/CoursesOnline/User-Service/pkg/utils"
 	"gorm.io/gorm"
 )
 
@@ -28,7 +28,7 @@ type userUseCase struct {
 func NewUserUseCase(userRepo *repo.UserRepository, cf *config.Config, h *utils.Hasher) *userUseCase {
 	return &userUseCase{cf: cf, userRepo: userRepo, h: h}
 }
-func (uc *userUseCase) GetInstructor(id, key string) (*pb.GetInstructorInformationResponse, error) {
+func (uc *userUseCase) GetInstructor(id, key string) (*User.GetInstructorInformationResponse, error) {
 	idDecode, err := uc.h.Decode(id)
 	if err != nil {
 		return nil, err
@@ -38,8 +38,8 @@ func (uc *userUseCase) GetInstructor(id, key string) (*pb.GetInstructorInformati
 	if err != nil {
 		return nil, err
 	}
-	return &pb.GetInstructorInformationResponse{
-		Information: &pb.Instructor{
+	return &User.GetInstructorInformationResponse{
+		Information: &User.Instructor{
 			Id:           uc.h.Encode(instructor.UserId),
 			FirstName:    instructor.User.FirstName,
 			LastName:     instructor.User.LastName,
@@ -51,7 +51,7 @@ func (uc *userUseCase) GetInstructor(id, key string) (*pb.GetInstructorInformati
 			NumStudents:  instructor.NumStudents,
 			NumReviews:   instructor.NumReviews,
 			TotalCourses: instructor.TotalCourses,
-			Avt: &pb.Picture{
+			Avt: &User.Picture{
 				Url:    instructor.User.Avatar.Url,
 				Width:  instructor.User.Avatar.Width,
 				Height: instructor.User.Avatar.Height,

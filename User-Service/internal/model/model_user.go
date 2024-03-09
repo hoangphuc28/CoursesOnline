@@ -1,8 +1,8 @@
 package model
 
 import (
-	"github.com/Zhoangp/User-Service/pkg/common"
-	"github.com/Zhoangp/User-Service/pkg/utils"
+	"github.com/hoangphuc28/CoursesOnline/User-Service/pkg/common"
+	"github.com/hoangphuc28/CoursesOnline/User-Service/pkg/utils"
 	"gorm.io/gorm"
 	"time"
 )
