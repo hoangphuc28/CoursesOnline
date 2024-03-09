@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"github.com/hoangphuc28/CoursesOnline-ProtoFile/Course"
 	"github.com/hoangphuc28/CoursesOnline/Course-Service/config"
-	"github.com/hoangphuc28/CoursesOnline/Course-Service/internal/delivery/https"
 	"github.com/hoangphuc28/CoursesOnline/Course-Service/internal/repo"
 	"github.com/hoangphuc28/CoursesOnline/Course-Service/internal/usecase"
 	"github.com/hoangphuc28/CoursesOnline/Course-Service/pkg/database/mysql"
@@ -33,7 +32,7 @@ func main() {
 	}
 	courseRepo := repo.NewCoursesRepository(gormDb)
 	courseUsecase := usecase.NewCoursesUseCase(courseRepo, hasher, cf)
-	courseHandler := https.NewCoursesHandler(courseUsecase, cf)
+	courseHandler := rpc.NewCoursesHandler(courseUsecase, cf)
 	lis, err := net.Listen("tcp", ":"+cf.Service.Port)
 	if err != nil {
 		fmt.Println(err)

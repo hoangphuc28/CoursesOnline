@@ -1,4 +1,4 @@
-package http
+package rpc
 
 import (
 	"github.com/hoangphuc28/CoursesOnline-ProtoFile/Error"

@@ -23,7 +23,6 @@ func main() {
 	if err != nil {
 		log.Fatalln("Failed at config", err)
 	}
-	// Run migrations when deploy the application
 	if env == "app" {
 		utils.RunDBMigration(cf)
 	}

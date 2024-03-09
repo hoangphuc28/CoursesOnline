@@ -1,9 +1,8 @@
 package common
 
 import (
-	"time"
-
 	"gorm.io/gorm"
+	"time"
 )
 
 type SQLModel struct {

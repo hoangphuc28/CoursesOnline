@@ -4,7 +4,7 @@ mysql:
   Port: 3307
   User: root
   Password: Abc123
-  DBName: course
+  DBName: User
 service:
   Version: 1.0.0
   Mode: development

@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"github.com/hoangphuc28/CoursesOnline-ProtoFile/Mail"
 	"github.com/hoangphuc28/CoursesOnline/Mail-Service/config"
-	"github.com/hoangphuc28/CoursesOnline/Mail-Service/internal/delivery/http"
 	usecase2 "github.com/hoangphuc28/CoursesOnline/Mail-Service/internal/usecase"
 	"google.golang.org/grpc"
 	"log"
@@ -23,7 +22,7 @@ func main() {
 		log.Fatalln("Failed at config", err)
 	}
 	usecase := usecase2.NewMailUsecase(cf)
-	handler := http.NewMailHandler(usecase)
+	handler := rpc.NewMailHandler(usecase)
 	lis, err := net.Listen("tcp", ":"+cf.Service.Port)
 	if err != nil {
 		fmt.Println(err)

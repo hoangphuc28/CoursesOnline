@@ -1,7 +1,6 @@
 package middleware
 
 import (
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/hoangphuc28/CoursesOnline-ProtoFile/Error"
 	"github.com/hoangphuc28/CoursesOnline/API-Gateway/pkg/common"
@@ -12,7 +11,6 @@ func (m *MiddleareManager) Recover() gin.HandlerFunc {
 		defer func() {
 			if err := recover(); err != nil {
 				if appErr, ok := err.(*Error.ErrorResponse); ok {
-					fmt.Println("check")
 					ctx.AbortWithStatusJSON(int(appErr.Code), appErr)
 					panic(err)
 				}
