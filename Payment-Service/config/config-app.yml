@@ -1,0 +1,29 @@
+mysql:
+  Host: mysql-course
+  Port: 3306
+  User: root
+  Password: Abc123
+  DBName: course
+service:
+  Version: 1.0.0
+  Mode: development
+  port: 4002
+  Secret: go-courses
+  AccessTokenExpiredIn: 3
+  RefreshTokenExpiredIn: 720
+paypal:
+  ClientId: AXfFfYQsM_Wdyomi9To5Cozx5aSxfuyl6XwVJ__YvtQqzLufcYnQH5Jr_pksY45M5qsgAI-8cpYgzTyd
+  SecretKey: ED75q26VgHhlPh3fBDKz_a7gaOXZ-W_oMeOIyKRsBw4C_CMEko8iw8vbDhLCJEk8NeDN1-kcnjCN2SSB
+  BaseUrl: https://api-m.sandbox.paypal.com
+  CreateOrderApi: /v2/checkout/orders
+  CaptureOrderApi: /v2/checkout/orders/%s/capture
+  PayoutApi: /v1/payments/payouts
+  GetAccessToken: /v1/oauth2/token
+  IdentifyApi: /v1/identity/oauth2/userinfo
+clientSide:
+  url: http://localhost:8080
+otherServices:
+  CartServiceUrl: cartservice:50054
+  CourseServiceUrl: courseservice:50053
+
+
