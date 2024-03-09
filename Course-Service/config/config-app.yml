@@ -1,0 +1,20 @@
+mysql:
+  Host: mysql-course
+  Port: 3306
+  User: root
+  Password: Abc123
+  DBName: course
+service:
+  Version: 1.0.0
+  Mode: development
+  port: 50053
+  Host: http://localhost:3000
+  Secret: go-courses
+  PasswordTokenExpired: 1
+  AccessTokenExpiredIn: 24
+  RefreshTokenExpiredIn: 720
+  MaxSizeMess: 10485760
+otherServices:
+  FileUrl: fileservice:4000
+  UserUrl: userservice:50052
+
