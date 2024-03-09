@@ -1,0 +1,11 @@
+service:
+  Version: 1.0.0
+  Mode: development
+  port: 4001
+  Secret: go-courses
+  ActiveTokenExpired: 1
+  AccessTokenExpiredIn: 24
+  RefreshTokenExpiredIn: 720
+email:
+  AppEmail: management.userxyz@gmail.com
+  AppPassword: lkkjakmjuqudztfa
